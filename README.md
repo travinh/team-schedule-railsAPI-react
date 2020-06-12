@@ -6,3 +6,5 @@ When you get to the website, you have to put your name and log in, then you coul
 
 With the schedule, you can create your own one, and change it whenever you want. All you need is logged in. However, you can not change other users' schedule.
 
+Here is the link for both front-end and back-end
+https://github.com/travinh/javascript_with_rails-api.git
