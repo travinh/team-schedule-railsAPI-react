@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Team Schedule
 
-Things you may want to cover:
+When you get to the website, you have to put your name and log in, then you could create/change the schedules.
 
-* Ruby version
+With the schedule, you can create your own one, and change it whenever you want. All you need is logged in. However, you can not change other users' schedule.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
