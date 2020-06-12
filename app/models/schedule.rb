@@ -1,3 +1,5 @@
 class Schedule < ApplicationRecord
-    validates :title, presence: true
+    belongs_to :user
+    validates :title, uniqueness: true, presence: true
+   
 end
