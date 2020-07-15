@@ -13,6 +13,10 @@ export default class Schedule extends Component {
         })
     }
 
+    remove = () => {
+        console.log("remove")
+    }
+
     render() {
         return (
             <div>
@@ -21,6 +25,7 @@ export default class Schedule extends Component {
                 <p>Member: {this.state.num_member} </p>
                 <p>User ID: {this.props.schedule.user_id}</p>
                 <button onClick={this.addMember}>+</button>
+                <button onClick={this.remove}>Delete</button>
                 <hr/>
             </div>
         )
