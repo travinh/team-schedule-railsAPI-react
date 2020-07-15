@@ -43,7 +43,7 @@ export default class ScheduleForm extends Component {
     
 
     render() {
-        console.log(this.state)
+        // console.log(this.state)
         return (
             <form id="schedule-form" onSubmit={this.handleSubmit} ref={this.formRef} >
                 <input type="text" placeholder="Title" name="title" onChange={this.handleChange} value={this.state.title}></input>

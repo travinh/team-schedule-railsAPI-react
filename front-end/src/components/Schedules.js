@@ -2,6 +2,12 @@ import React, {Component} from 'react'
 import Schedule from './Schedule'
 import Clock from './Clock'
 import ScheduleForm from './ScheduleForm'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from "react-router-dom"
 
 
 class Schedules extends Component{
@@ -9,10 +15,16 @@ class Schedules extends Component{
     constructor(props) {
         super(props)
     
+        // this.state = {
+        //     schedules: [{id:1,title: "appointment",content: "with team",user_id: 1},
+        //     {id:2, title: "meeting",content: "with customer",user_id: 2}],  
+        //     title:"Loading..." , displayClock:true   
+             
+        // }
         this.state = {
-            schedules: [{id:1,title: "appointment",content: "with team",user_id: 1},
-            {id:2, title: "meeting",content: "with customer",user_id: 2}],  
-            title:"Loading..." , displayClock:true   
+            schedules: [],  
+            title:"Loading..." , 
+            displayClock:true   
              
         }
         this.remove = this.remove.bind(this)
@@ -41,10 +53,17 @@ class Schedules extends Component{
 
     componentDidMount(){
         //place to make AJAX requests
+        fetch("http://localhost:3000/api/v1/schedules")
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({schedules:data})
+        })
         
         setTimeout(() => {
             this.setState({title:"Schedules List"})
         }, 1000);
+
+        
 
         // console.log("3. Schedules did mount")
     }
@@ -70,16 +89,31 @@ class Schedules extends Component{
     }
 
     render(){
-        // console.log("2. render schedules")
+        // console.log(this.state)
         return(
-            <>
-                <h1>{this.state.title}</h1>
-                {this.state.displayClock ? <Clock /> : null}
-                <button onClick={this.toggleClock}>{this.state.displayClock ? "Hide Clock" : "Show Clock"}</button>
-                {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
-                < ScheduleForm addSchedule={this.addSchedule}/>
+            <Router>
+                <div>
+                    <Switch>
+                        <Route path="/schedules/new">
+                            < ScheduleForm addSchedule={this.addSchedule}/>
+                        </Route>
 
-            </>
+                        <Route exact path="/" render={()=> <h1>{this.state.title}</h1>}/>
+
+                        <Route>
+                            {this.state.displayClock ? <Clock /> : null}
+                            <button onClick={this.toggleClock}>{this.state.displayClock ? "Hide Clock" : "Show Clock"}</button>
+                    
+                        </Route>
+                    </Switch>
+                    
+                   {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
+                    
+
+                </div>
+
+            </Router>
+          
         )
     }
 }
