@@ -3,6 +3,7 @@ import Schedule from './Schedule'
 import Clock from './Clock'
 import ScheduleForm from './ScheduleForm'
 import ScheduleShow from './ScheduleShow'
+import axios from 'axios'
 import {
     BrowserRouter as Router,
     Switch,
@@ -36,19 +37,41 @@ class Schedules extends Component{
     remove(id){
         //this is here is a single schedule when we call it
         // console.log("remove ", id,this)
-        this.setState((prevState)=>{
-            const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
-            return {schedules: filteredSchedules}
-        })
+        // this.setState((prevState)=>{
+        //     const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
+        //     return {schedules: filteredSchedules}
+        // })
+
+        axios.delete(`http://localhost:3000/api/v1/schedules/${id}`)
+            .then(resp =>{
+               
+                console.log(resp)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+        // fetch("http://localhost:3000/api/v1/schedules")
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     this.setState({schedules:data})
+        // })
     }
+
+  
 
     addSchedule = (schedule) =>{
         console.log("add schedule")
-        this.setState((prevState)=>{
-            const id = prevState.schedules[prevState.schedules.length -1].id +1
-            const copySchedule = {...schedule,id}
-            console.log(copySchedule)
-            return {schedules: [...prevState.schedules, copySchedule]}
+        // this.setState((prevState)=>{
+            // const id = prevState.schedules[prevState.schedules.length -1].id +1
+            // const copySchedule = {...schedule,id}
+            // console.log(copySchedule)
+            // return {schedules: [...prevState.schedules, copySchedule]}
+        // })
+        fetch("http://localhost:3000/api/v1/schedules")
+        .then(resp => resp.json())
+        .then(data => {
+            this.setState({schedules:data})
         })
     }
 
@@ -73,6 +96,18 @@ class Schedules extends Component{
         //use for AJAX requests that use more than once
         
         // console.log("4.Component Did update")
+
+        // let respBool = false
+        // if(respBool===false)
+        // {
+        //     fetch("http://localhost:3000/api/v1/schedules")
+        //     .then(resp => resp.json())
+        //     .then(data => {
+        //         respBool = true
+        //         this.setState({schedules:data})
+        //     })
+        // }
+       
         
 
     }
@@ -119,7 +154,7 @@ class Schedules extends Component{
                         
                         <Route path="/">
                             <h1>{this.state.title}</h1>
-                            {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
+                            {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} />)}
                         </Route>
 
                     </Switch>

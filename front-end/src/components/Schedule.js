@@ -34,19 +34,22 @@ import {Link} from 'react-router-dom'
 
 
 
-export default function Schedule({schedule:{id,title,content,user_id},remove}) {
+export default function Schedule({schedule:{id,title,content,user_id,num_member},remove}) {
+    
 
-    const [num_member, setNumMember] = useState(0)
+    const [num_mem, setNumMember] = useState(num_member)
 
 
-
+    
     return (
         <div>
             <Link to={`/schedules/${id}`}><p>Title: {title} </p></Link>
             <p>Content: {content}</p>
-            <p>Member: {num_member} </p>
+            <p>Member: {num_mem} </p>
             <p>User ID: {user_id}</p>
-            <button onClick={()=> {setNumMember(num_member+1)}}>+</button>
+            {/* <button onClick={()=> addMember(num_member)}>+</button> */}
+            <button onClick={()=> {setNumMember(num_mem+1)}}>+</button>
+            
             <button onClick={() => remove(id)}>Delete</button>
 
         <hr/>
