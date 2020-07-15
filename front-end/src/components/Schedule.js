@@ -7,15 +7,13 @@ export default class Schedule extends Component {
     }
 
     addMember = () => {
-        console.log(this)
+        // console.log(this)
         this.setState((prevState) => {
             return {num_member: prevState.num_member +1}
         })
     }
 
-    remove = () => {
-        console.log("remove")
-    }
+    
 
     render() {
         return (
@@ -25,7 +23,7 @@ export default class Schedule extends Component {
                 <p>Member: {this.state.num_member} </p>
                 <p>User ID: {this.props.schedule.user_id}</p>
                 <button onClick={this.addMember}>+</button>
-                <button onClick={this.remove}>Delete</button>
+                <button onClick={() => this.props.remove(this.props.schedule.id)}>Delete</button>
                 <hr/>
             </div>
         )
