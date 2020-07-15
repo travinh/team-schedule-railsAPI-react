@@ -5,11 +5,17 @@ class Clock extends Component{
         time: new Date()
     }
 
+    componentDidMount(){
+        setInterval(() => {
+            this.setState({time: new Date()})
+        }, 1000);
+    }
+
 
     render(){
         return(
             <div>
-                <h2>{this.state.time.toLocaleDateString}</h2>
+                <h2>{this.state.time.toLocaleString()}</h2>
             </div>
         )
     }
