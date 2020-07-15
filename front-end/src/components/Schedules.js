@@ -4,12 +4,25 @@ import ScheduleForm from './ScheduleForm'
 
 
 class Schedules extends Component{
-    state={
-        schedules: [{id:1,title: "appointment",content: "with team",user_id: 1},
-        {id:2, title: "meeting",content: "with customer",user_id: 2}]
-        
+
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            schedules: [{id:1,title: "appointment",content: "with team",user_id: 1},
+            {id:2, title: "meeting",content: "with customer",user_id: 2}]    
+             
+        }
+        this.remove = this.remove.bind(this)
+        console.log("1. Schedules constructor")
     }
-    remove = (id) => {
+    
+    componentDidMount(){
+        console.log("Schedules did mount")
+    }
+
+
+    remove(id){
         //this is here is a single schedule when we call it
         console.log("remove ", id,this)
         this.setState((prevState)=>{
@@ -23,6 +36,7 @@ class Schedules extends Component{
         this.setState((prevState)=>{
             const id = prevState.schedules[prevState.schedules.length -1].id +1
             const copySchedule = {...schedule,id}
+            console.log(copySchedule)
             return {schedules: [...prevState.schedules, copySchedule]}
         })
     }
