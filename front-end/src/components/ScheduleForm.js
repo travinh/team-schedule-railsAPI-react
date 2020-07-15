@@ -63,6 +63,8 @@ export default class ScheduleForm extends Component {
             user_id : "",
             num_member: ""
         })
+
+        window.location.reload(false)
     }
 
     handleChange = (e) =>{
