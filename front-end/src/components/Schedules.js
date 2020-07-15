@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Schedule from './Schedule'
 import Clock from './Clock'
 import ScheduleForm from './ScheduleForm'
+import ScheduleShow from './ScheduleShow'
 import {
     BrowserRouter as Router,
     Switch,
@@ -110,6 +111,10 @@ class Schedules extends Component{
                             <button onClick={this.toggleClock}>{this.state.displayClock ? "Hide Clock" : "Show Clock"}</button>
                     
                         </Route>
+
+                        <Route path="/schedules/:id" render={(routerProps)=> <ScheduleShow {...routerProps} schedules={this.state.schedules}/>} />
+
+                       
 
                         
                         <Route path="/">
