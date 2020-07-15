@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Schedule from './Schedule'
+import ScheduleForm from './ScheduleForm'
 
 
 class Schedules extends Component{
@@ -17,11 +18,23 @@ class Schedules extends Component{
         })
     }
 
+    addSchedule = (schedule) =>{
+        console.log("add schedule")
+        this.setState((prevState)=>{
+            const id = prevState.schedules[prevState.schedules.length -1].id +1
+            const copySchedule = {...schedule,id}
+            return {schedules: [...prevState.schedules, copySchedule]}
+        })
+    }
+
 
     render(){
+        console.log("render schedules")
         return(
             <>
                 {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
+                < ScheduleForm addSchedule={this.addSchedule}/>
+
             </>
         )
     }
