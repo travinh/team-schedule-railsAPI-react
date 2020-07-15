@@ -93,22 +93,33 @@ class Schedules extends Component{
         return(
             <Router>
                 <div>
+                    <Link to="/"><button>Home</button></Link>
+                    <Link to="/schedules/new"><button>New Shedule</button></Link>
+                    <Link to="/clock"><button>Clock</button></Link>
+
                     <Switch>
                         <Route path="/schedules/new">
+                            <h2>Create New Schedule</h2>
                             < ScheduleForm addSchedule={this.addSchedule}/>
                         </Route>
 
-                        <Route exact path="/" render={()=> <h1>{this.state.title}</h1>}/>
-
-                        <Route>
+                        
+                        <Route path="/clock">
+                            <h2>Clock</h2>
                             {this.state.displayClock ? <Clock /> : null}
                             <button onClick={this.toggleClock}>{this.state.displayClock ? "Hide Clock" : "Show Clock"}</button>
                     
                         </Route>
+
+                        
+                        <Route path="/">
+                            <h1>{this.state.title}</h1>
+                            {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
+                        </Route>
+
                     </Switch>
                     
-                   {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
-                    
+                   
 
                 </div>
 
