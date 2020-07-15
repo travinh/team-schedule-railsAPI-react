@@ -6,8 +6,11 @@ export default class Schedule extends Component {
         num_member:0
     }
 
-    addMember(){
-        console.log("add member")
+    addMember = () => {
+        console.log(this)
+        this.setState((prevState) => {
+            return {num_member: prevState.num_member +1}
+        })
     }
 
     render() {
