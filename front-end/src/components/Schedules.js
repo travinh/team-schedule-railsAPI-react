@@ -47,6 +47,14 @@ class Schedules extends Component{
         console.log("3. Schedules did mount")
     }
 
+    componentDidUpdate(prevProps, prevState){
+        //use for AJAX requests that use more than once
+        
+        console.log("4.Component Did update")
+        
+
+    }
+
     // shouldComponentUpdate(nextProps, nextState){
     //     if(nextState.title === this.state.title){
     //         return false
