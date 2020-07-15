@@ -10,7 +10,7 @@ class Schedules extends Component{
     render(){
         return(
             <>
-                {schedules.map(schedule => <Schedule schedule={schedule}/>)}
+                {schedules.map(schedule => <Schedule {...schedule}/>)}
             </>
         )
     }
