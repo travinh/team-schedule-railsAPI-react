@@ -10,15 +10,11 @@ class Schedules extends Component{
     
         this.state = {
             schedules: [{id:1,title: "appointment",content: "with team",user_id: 1},
-            {id:2, title: "meeting",content: "with customer",user_id: 2}]    
+            {id:2, title: "meeting",content: "with customer",user_id: 2}],  title:"Loading..."    
              
         }
         this.remove = this.remove.bind(this)
         console.log("1. Schedules constructor")
-    }
-    
-    componentDidMount(){
-        console.log("Schedules did mount")
     }
 
 
@@ -41,11 +37,30 @@ class Schedules extends Component{
         })
     }
 
+    componentDidMount(){
+        //place to make AJAX requests
+        
+        setTimeout(() => {
+            this.setState({title:"Schedules List"})
+        }, 1000);
+
+        console.log("3. Schedules did mount")
+    }
+
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(nextState.title === this.state.title){
+    //         return false
+    //     }
+    //     else 
+    //         return true
+    // }
+
 
     render(){
-        console.log("render schedules")
+        console.log("2. render schedules")
         return(
             <>
+                <h1>{this.state.title}</h1>
                 {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove}/>)}
                 < ScheduleForm addSchedule={this.addSchedule}/>
 
