@@ -23,6 +23,7 @@ class Api::V1::SchedulesController < ApplicationController
     end 
     
     def update
+  
     
         id = Schedule.find_by(title: params[:schedule][:title])[:user_id]
         id2 = params[:schedule][:user_id]
@@ -39,15 +40,15 @@ class Api::V1::SchedulesController < ApplicationController
    
     def destroy
         
-        id = params[:user_id]
-        id2 = Schedule.find_by_id(params[:id].to_i)[:user_id]
+        # id = params[:user_id]
+        # id2 = Schedule.find_by_id(params[:id].to_i)[:user_id]
         
-        if (id == id2)
+        # if (id == id2)
             @schedule.destroy
             render json: @schedule
-        else
-            render json:{errors: "You are not allowed to delete this schedule"}
-        end
+        # else
+            # render json:{errors: "You are not allowed to delete this schedule"}
+        # end
     end 
 
 
