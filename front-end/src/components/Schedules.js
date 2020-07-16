@@ -3,7 +3,7 @@ import Schedule from './Schedule'
 import Clock from './Clock'
 import ScheduleForm from './ScheduleForm'
 import ScheduleShow from './ScheduleShow'
-import axios from 'axios'
+// import axios from 'axios'
 import {
     BrowserRouter as Router,
     Switch,
@@ -17,18 +17,18 @@ class Schedules extends Component{
     constructor(props) {
         super(props)
     
-        // this.state = {
-        //     schedules: [{id:1,title: "appointment",content: "with team",user_id: 1},
-        //     {id:2, title: "meeting",content: "with customer",user_id: 2}],  
-        //     title:"Loading..." , displayClock:true   
-             
-        // }
         this.state = {
-            schedules: [],  
-            title:"Loading..." , 
-            displayClock:true   
+            schedules: [{id:1,title: "appointment",content: "with team",user_id: 1, num_member: 0},
+            {id:2, title: "meeting",content: "with customer",user_id: 2, num_member: 0}],  
+            title:"Loading..." , displayClock:true   
              
         }
+        // this.state = {
+        //     schedules: [],  
+        //     title:"Loading..." , 
+        //     displayClock:true   
+             
+        // }
         this.remove = this.remove.bind(this)
         // console.log("1. Schedules constructor")
     }
@@ -36,55 +36,55 @@ class Schedules extends Component{
 
     remove(id){
         //this is here is a single schedule when we call it
-        // console.log("remove ", id,this)
-        // this.setState((prevState)=>{
-        //     const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
-        //     return {schedules: filteredSchedules}
-        // })
-
-        axios.delete(`http://localhost:3000/api/v1/schedules/${id}`)
-            .then(resp =>{
-               
-                console.log(resp)
-            })
-            .catch(error => {
-                console.log(error)
-            })
-
-        fetch("http://localhost:3000/api/v1/schedules")
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({schedules:data})
+        console.log("remove ", id,this)
+        this.setState((prevState)=>{
+            const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
+            return {schedules: filteredSchedules}
         })
-        window.location.reload(false)
+
+        // axios.delete(`http://localhost:3000/api/v1/schedules/${id}`)
+        //     .then(resp =>{
+               
+        //         console.log(resp)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+
+        // fetch("http://localhost:3000/api/v1/schedules")
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     this.setState({schedules:data})
+        // })
+        // window.location.reload(false)
     }
 
   
 
     addSchedule = (schedule) =>{
         console.log("add schedule")
-        // this.setState((prevState)=>{
-            // const id = prevState.schedules[prevState.schedules.length -1].id +1
-            // const copySchedule = {...schedule,id}
-            // console.log(copySchedule)
-            // return {schedules: [...prevState.schedules, copySchedule]}
-        // })
-        fetch("http://localhost:3000/api/v1/schedules")
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({schedules:data})
+        this.setState((prevState)=>{
+            const id = prevState.schedules[prevState.schedules.length -1].id +1
+            const copySchedule = {...schedule,id}
+            console.log(copySchedule)
+            return {schedules: [...prevState.schedules, copySchedule]}
         })
+        // fetch("http://localhost:3000/api/v1/schedules")
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     this.setState({schedules:data})
+        // })
         
 
     }
 
     componentDidMount(){
         //place to make AJAX requests
-        fetch("http://localhost:3000/api/v1/schedules")
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({schedules:data})
-        })
+        // fetch("http://localhost:3000/api/v1/schedules")
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     this.setState({schedules:data})
+        // })
         
         setTimeout(() => {
             this.setState({title:"Schedules List"})

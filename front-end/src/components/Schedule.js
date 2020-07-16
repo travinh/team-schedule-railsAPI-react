@@ -36,13 +36,15 @@ import {Link} from 'react-router-dom'
 
 export default function Schedule({schedule:{id,title,content,user_id,num_member},remove}) {
     
-
+    
     const [num_mem, setNumMember] = useState(num_member)
 
 
     
     return (
+        
         <div>
+            
             <Link to={`/schedules/${id}`}><p>Title: {title} </p></Link>
             <p>Content: {content}</p>
             <p>Member: {num_mem} </p>

@@ -59,7 +59,7 @@ export default class ScheduleShow extends Component {
     render() {
         console.log(this.state)
    
-        if (this.state.schedule.id != null){
+        if (this.state.schedule != null){
             return (
                 <div>
                     <p>Title: {this.state.schedule.title} </p>

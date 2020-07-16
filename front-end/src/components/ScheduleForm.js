@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default class ScheduleForm extends Component {
 
@@ -46,13 +46,15 @@ export default class ScheduleForm extends Component {
         e.preventDefault()
         console.log(this.state)
         this.props.addSchedule(this.state)
-        axios.post('http://localhost:3000/api/v1/schedules',this.state)
-            .then(resp =>{
-                console.log(resp)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+
+
+        // axios.post('http://localhost:3000/api/v1/schedules',this.state)
+        //     .then(resp =>{
+        //         console.log(resp)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
 
 
         
@@ -63,8 +65,6 @@ export default class ScheduleForm extends Component {
             user_id : "",
             num_member: ""
         })
-
-        window.location.reload(false)
     }
 
     handleChange = (e) =>{
