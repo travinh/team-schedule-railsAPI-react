@@ -5,19 +5,12 @@ import {createStore, compose} from 'redux'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import scheduleReducer from '../reducer/scheduleReducer'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 let store = createStore(scheduleReducer, composeEnhancers())
 
-function scheduleReducer(state={schedules:[{id:0, title:"nothing", content: "init state", num_member: 0, user_id: 1}]}, action){
-  switch(action.type){
-    case "ADD_SCHEDULE":
-      return {...state, schedules:[...state.schedules,action.payload]}
-    default:
-      return state
-  }
 
-}
 
 ReactDOM.render(
   <Provider store={store}><App /></Provider>
