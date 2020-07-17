@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 // import axios from 'axios'
 
-export default class ScheduleForm extends Component {
+export class ScheduleForm extends Component {
 
     constructor(props) {
         super(props)
@@ -45,6 +46,8 @@ export default class ScheduleForm extends Component {
  
         e.preventDefault()
         console.log(this.state)
+       
+
         this.props.addSchedule(this.state)
 
 
@@ -87,3 +90,13 @@ export default class ScheduleForm extends Component {
         )
     }
 }
+
+function mapDispatchToProps(dispatch){
+    console.log("map Dispatch to props")
+    //return object
+    return{
+        addSchedule: (schedule) => dispatch({type:"ADD_SCHEDULE",payload:schedule})
+    }
+}
+
+export default connect(null, mapDispatchToProps) (ScheduleForm)

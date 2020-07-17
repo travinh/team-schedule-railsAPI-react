@@ -63,22 +63,22 @@ class Schedules extends Component{
 
   
 
-    addSchedule = (schedule) =>{
-        console.log("add schedule")
-        this.setState((prevState)=>{
-            const id = prevState.schedules[prevState.schedules.length -1].id +1
-            const copySchedule = {...schedule,id}
-            console.log(copySchedule)
-            return {schedules: [...prevState.schedules, copySchedule]}
-        })
-        // fetch("http://localhost:3000/api/v1/schedules")
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     this.setState({schedules:data})
-        // })
+    // addSchedule = (schedule) =>{
+    //     console.log("add schedule")
+    //     this.setState((prevState)=>{
+    //         const id = prevState.schedules[prevState.schedules.length -1].id +1
+    //         const copySchedule = {...schedule,id}
+    //         console.log(copySchedule)
+    //         return {schedules: [...prevState.schedules, copySchedule]}
+    //     })
+    //     // fetch("http://localhost:3000/api/v1/schedules")
+    //     // .then(resp => resp.json())
+    //     // .then(data => {
+    //     //     this.setState({schedules:data})
+    //     // })
         
 
-    }
+    // }
 
     componentDidMount(){
         //place to make AJAX requests
@@ -142,10 +142,12 @@ class Schedules extends Component{
                     <Link to="/clock"><button>Clock</button></Link>
 
                     <Switch>
-                        <Route path="/schedules/new">
+                        {/* <Route path="/schedules/new">
                             <h2>Create New Schedule</h2>
                             < ScheduleForm addSchedule={this.addSchedule}/>
-                        </Route>
+                        </Route> */}
+                        <Route path="/schedules/new" component={ScheduleForm}/>
+                        
 
                         
                         <Route path="/clock">

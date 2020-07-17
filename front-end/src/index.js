@@ -12,7 +12,7 @@ let store = createStore(scheduleReducer, composeEnhancers())
 function scheduleReducer(state={schedules:[{id:0, title:"nothing", content: "init state", num_member: 0, user_id: 1}]}, action){
   switch(action.type){
     case "ADD_SCHEDULE":
-      return [...state, action.payload]
+      return {...state, schedules:[...state.schedules,action.payload]}
     default:
       return state
   }
