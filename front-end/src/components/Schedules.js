@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import Schedule from './Schedule'
 import Clock from './Clock'
 import ScheduleForm from './ScheduleForm'
@@ -18,8 +19,9 @@ class Schedules extends Component{
         super(props)
     
         this.state = {
-            schedules: [{id:1,title: "appointment",content: "with team",user_id: 1, num_member: 0},
-            {id:2, title: "meeting",content: "with customer",user_id: 2, num_member: 0}],  
+            // {id:1,title: "appointment",content: "with team",user_id: 1, num_member: 0},
+            // {id:2, title: "meeting",content: "with customer",user_id: 2, num_member: 0}
+            schedules: [],  
             title:"Loading..." , displayClock:true   
              
         }
@@ -128,7 +130,10 @@ class Schedules extends Component{
     }
 
     render(){
-        // console.log(this.state)
+        
+        // console.log("state:",this.state)
+        console.log("props:",this.props)
+       
         return(
             <Router>
                 <div>
@@ -153,11 +158,12 @@ class Schedules extends Component{
                         <Route path="/schedules/:id" render={(routerProps)=> <ScheduleShow {...routerProps} schedules={this.state.schedules}/>} />
 
                        
-
+                        
                         
                         <Route path="/">
+                            
                             <h1>{this.state.title}</h1>
-                            {this.state.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} />)}
+                            {this.props.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} />)}
                         </Route>
 
                     </Switch>
@@ -172,4 +178,12 @@ class Schedules extends Component{
     }
 }
 
-export default Schedules
+function mapStateToProps(store){
+    console.log("store:",store)
+    return{
+
+        schedules: store.schedules
+    }
+}
+
+export default connect(mapStateToProps) (Schedules)
