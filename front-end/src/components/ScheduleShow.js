@@ -1,32 +1,3 @@
-// import React, { useState } from 'react'
-
-// import {Link} from 'react-router-dom'
-
-
-
-
-// export default function ScheduleShow(props) {
-//     // {props,schedule:{id,title,content,user_id},remove}
-//     const [num_member, setNumMember] = useState(0)
-
-
-
-//     return (
-//         <div>
-//             {console.log(props)}
-//             <h1>Schedule Information</h1>
-//             {/* <Link to={`/schedules/${id}`}><p>Title: {title} </p></Link>
-//             <p>Content: {content}</p>
-//             <p>Member: {num_member} </p>
-//             <p>User ID: {user_id}</p>
-//             <button onClick={()=> {setNumMember(num_member+1)}}>+</button>
-//             <button onClick={() => remove(id)}>Delete</button>
-
-//         <hr/> */}
-            
-//         </div>
-//     )
-// }
 
 import React, { Component } from 'react'
 

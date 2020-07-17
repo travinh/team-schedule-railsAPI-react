@@ -4,6 +4,8 @@ import Schedule from './Schedule'
 import Clock from './Clock'
 import ScheduleForm from './ScheduleForm'
 import ScheduleShow from './ScheduleShow'
+import {fetchSchedules} from '../actions/scheduleActions'
+
 // import axios from 'axios'
 import {
     BrowserRouter as Router,
@@ -85,8 +87,9 @@ class Schedules extends Component{
         // fetch("http://localhost:3000/api/v1/schedules")
         // .then(resp => resp.json())
         // .then(data => {
-        //     this.setState({schedules:data})
+        //     this.props.setSchedules(data)
         // })
+        this.props.fetchSchedules()
         
         setTimeout(() => {
             this.setState({title:"Schedules List"})
@@ -157,7 +160,8 @@ class Schedules extends Component{
                     
                         </Route>
 
-                        <Route path="/schedules/:id" render={(routerProps)=> <ScheduleShow {...routerProps} schedules={this.state.schedules}/>} />
+                        {/* <Route path="/schedules/:id" render={(routerProps)=> <ScheduleShow {...routerProps} schedules={this.state.schedules}/>} /> */}
+                        <Route path="/schedules/:id" component={ScheduleShow}/>                        
 
                        
                         
@@ -188,4 +192,4 @@ function mapStateToProps(store){
     }
 }
 
-export default connect(mapStateToProps) (Schedules)
+export default connect(mapStateToProps, {fetchSchedules}) (Schedules)
