@@ -15,7 +15,7 @@ export const fetchSchedules = () => {
         return fetch("http://localhost:3000/api/v1/schedules")
         .then(resp => resp.json())
         .then(data => {
-            dispatch(setSchedules(data))
+            dispatch(setSchedules(data)) 
         })
     }
 }
