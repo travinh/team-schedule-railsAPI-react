@@ -97,16 +97,18 @@ class Schedules extends Component{
 
         
 
+        
+
         // console.log("3. Schedules did mount")
     }
 
     componentDidUpdate(prevProps, prevState){
         //use for AJAX requests that use more than once
         
-        // console.log("4.Component Did update")
+        
 
-        // let respBool = false
-        // if(respBool===false)
+        
+        // if()
         // {
         //     fetch("http://localhost:3000/api/v1/schedules")
         //     .then(resp => resp.json())
@@ -132,6 +134,13 @@ class Schedules extends Component{
         this.setState((prevState) => ({displayClock:!prevState.displayClock}))
     }
 
+    refreshData = () =>{
+        console.log("hello")
+        this.props.fetchSchedules()
+        
+
+    }
+
     render(){
         
         // console.log("state:",this.state)
@@ -140,7 +149,7 @@ class Schedules extends Component{
         return(
             <Router>
                 <div>
-                    <Link to="/"><button>Home</button></Link>
+                    <Link to="/" onClick={this.refreshData}><button>Home</button></Link>
                     <Link to="/schedules/new"><button>New Shedule</button></Link>
                     <Link to="/clock"><button>Clock</button></Link>
 
@@ -167,6 +176,7 @@ class Schedules extends Component{
                         
                         
                         <Route path="/">
+                            
                             
                             <h1>{this.state.title}</h1>
                             {this.props.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} />)}

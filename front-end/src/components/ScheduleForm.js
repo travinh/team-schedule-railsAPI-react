@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {postSchedule} from '../actions/scheduleActions'
+
 
 import {addSchedule} from '../actions/scheduleActions';
 // import axios from 'axios'
@@ -49,8 +51,11 @@ export class ScheduleForm extends Component {
         e.preventDefault()
         console.log(this.state)
        
-
-        this.props.addSchedule(this.state)
+   
+        
+        //this.props.addSchedule(this.state)
+        this.props.postSchedule(this.state)
+        
 
 
         // axios.post('http://localhost:3000/api/v1/schedules',this.state)
@@ -70,6 +75,8 @@ export class ScheduleForm extends Component {
             user_id : "",
             num_member: ""
         })
+
+        
     }
 
     handleChange = (e) =>{
@@ -79,7 +86,7 @@ export class ScheduleForm extends Component {
     
 
     render() {
-        
+       
         // console.log(this.state)
         return (
             <form id="schedule-form" onSubmit={this.handleSubmit} ref={this.formRef} >
@@ -102,4 +109,4 @@ export class ScheduleForm extends Component {
 // }
 
 
-export default connect(null, {addSchedule}) (ScheduleForm)
+export default connect(null, {addSchedule, postSchedule}) (ScheduleForm)
