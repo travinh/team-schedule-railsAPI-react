@@ -5,10 +5,10 @@ import {createStore, compose} from 'redux'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import scheduleReducer from '../reducer/scheduleReducer'
+import rootReducer from './reducers'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-let store = createStore(scheduleReducer, composeEnhancers())
+let store = createStore(rootReducer, composeEnhancers())
 
 
 
