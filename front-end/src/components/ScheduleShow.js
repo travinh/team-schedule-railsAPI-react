@@ -1,30 +1,31 @@
 
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
+import {scheduleShow} from '../actions/scheduleActions'
 
 
-export default class ScheduleShow extends Component {
-    state= {
-        schedule: {
-            title: "",
-            content: "",
-            user_id: "",
-            num_member: ""
-        }
-    }
 
-    // componentDidMount(){
-        
-    //     // fetch(`http://localhost:3000/api/v1/schedules/${this.props.match.params.id}`)
-    //     // .then(resp => resp.json())
-    //     // .then(data => {
-    //     //     if (data !=null){
-    //     //         this.setState({schedule:data})
-    //     //     }
-            
-
-    //     // })
-        
+export class ScheduleShow extends Component {
+    // state= {
+    //     schedule: {
+    //         title: "",
+    //         content: "",
+    //         user_id: "",
+    //         num_member: ""
+    //     }
     // }
+
+    componentDidMount(){
+        
+        // fetch(`http://localhost:3000/api/v1/schedules/${this.props.match.params.id}`)
+        // .then(resp => resp.json())
+        // .then(data => {
+        //     if (data !=null){
+        //         this.props.setSchedule(data)
+        //     }
+        // })     
+        this.props.scheduleShow(this.props.match.params.id)
+    }
 
    
     
@@ -33,10 +34,10 @@ export default class ScheduleShow extends Component {
         console.log(this.state)
         return (
             <div>
-                <p>Title: {this.state.schedule.title} </p>
-                <p>Content: {this.state.schedule.content}</p>
-                <p>Member: {this.state.schedule.num_member} </p>
-                <p>User ID: {this.state.schedule.user_id}</p>
+                <p>Title: {this.props.schedule.title} </p>
+                <p>Content: {this.props.schedule.content}</p>
+                <p>Member: {this.props.schedule.num_member} </p>
+                <p>User ID: {this.props.schedule.user_id}</p>
                 
             </div>
         )
@@ -62,5 +63,14 @@ export default class ScheduleShow extends Component {
         
     }
 }
+
+const mapStateToProps =(state) =>{
+    return{
+        schedule:state.selectedSchedule
+        
+    }
+}
+
+export default connect(mapStateToProps,{scheduleShow})(ScheduleShow)
 
 

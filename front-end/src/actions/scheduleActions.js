@@ -23,8 +23,13 @@ export const scheduleShow = (id) =>{
         return  fetch(`http://localhost:3000/api/v1/schedules/${id}`)
         .then(resp => resp.json())
         .then(data => {
-            debugger
-            dispatch(setSchedule(data))
+            if (data == null){
+                alert("Schedule not found")
+            }
+            else{
+                dispatch(setSchedule(data))
+            }
+            
         })
     }
 }
