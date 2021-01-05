@@ -1,6 +1,6 @@
 export default function postSchedule(state={}, action){
     switch(action.type){
-        case "SET_SCHEDULE":
+        case "POST_SCHEDULE":
             return action.payload
         default:
             return state

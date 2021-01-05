@@ -27,33 +27,38 @@ class Schedules extends Component{
             title:"Loading..." , displayClock:true   
              
         }
-        // this.state = {
-        //     schedules: [],  
-        //     title:"Loading..." , 
-        //     displayClock:true   
-             
-        // }
+      
         this.remove = this.remove.bind(this)
-        // console.log("1. Schedules constructor")
+        console.log("1. Schedules constructor")
     }
 
 
+    like(){
+        console.log(
+            "liked"
+        )
+    }
     remove(id){
         //this is here is a single schedule when we call it
-        console.log("remove ", id,this)
-        this.setState((prevState)=>{
-            const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
-            return {schedules: filteredSchedules}
-        })
+        console.log("remove ", id,this.props)
+        
+        
+        // this.setState((prevState)=>{
+        //     debugger
+        //     const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
+        //     return {schedules: filteredSchedules}
+        // })
 
         // axios.delete(`http://localhost:3000/api/v1/schedules/${id}`)
         //     .then(resp =>{
                
-        //         console.log(resp)
+        //         console.log("resp:",resp)
         //     })
         //     .catch(error => {
         //         console.log(error)
         //     })
+
+      
 
         // fetch("http://localhost:3000/api/v1/schedules")
         // .then(resp => resp.json())
@@ -89,20 +94,18 @@ class Schedules extends Component{
         // .then(data => {
         //     this.props.setSchedules(data)
         // })
+        console.log("A")
         this.props.fetchSchedules()
+        console.log("B")
         
         setTimeout(() => {
             this.setState({title:"Schedules List"})
         }, 1000);
-
         
-
-        
-
-        // console.log("3. Schedules did mount")
     }
 
     componentDidUpdate(prevProps, prevState){
+        console.log("4. Schedules did update")
         //use for AJAX requests that use more than once
         
         
@@ -135,7 +138,7 @@ class Schedules extends Component{
     }
 
     refreshData = () =>{
-        console.log("hello")
+        console.log("Refreshed data!!")
         this.props.fetchSchedules()
         
 
@@ -143,8 +146,9 @@ class Schedules extends Component{
 
     render(){
         
-        // console.log("state:",this.state)
-        console.log("props:",this.props)
+        console.log("state render:",this.state)
+        console.log("props render:",this.props)
+        
        
         return(
             <Router>
@@ -176,10 +180,8 @@ class Schedules extends Component{
                         
                         
                         <Route path="/">
-                            
-                            
                             <h1>{this.state.title}</h1>
-                            {this.props.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} />)}
+                            {this.props.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} like={this.like}/>)}
                         </Route>
 
                     </Switch>
@@ -194,11 +196,12 @@ class Schedules extends Component{
     }
 }
 
-function mapStateToProps(store){
-    console.log("store:",store)
+function mapStateToProps(state){
+    console.log("state:",state)
+    
     return{
 
-        schedules: store.schedules
+        schedules: state.schedules
     }
 }
 

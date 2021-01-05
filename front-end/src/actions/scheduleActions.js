@@ -12,9 +12,12 @@ export const createSchedule = (schedule) => ({type:"POST_SCHEDULE", payload:sche
 
 export const fetchSchedules = () => {
     return(dispatch) => {
+        console.log("C")
         return fetch("http://localhost:3000/api/v1/schedules")
         .then(resp => resp.json())
         .then(data => {
+            // console.log("data: ", data);
+            console.log("D")
             dispatch(setSchedules(data)) 
         })
     }

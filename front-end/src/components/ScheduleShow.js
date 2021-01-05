@@ -17,7 +17,7 @@ export class ScheduleShow extends Component {
 
     componentDidMount(){
         
- 
+        
         this.props.scheduleShow(this.props.match.params.id)
     }
 

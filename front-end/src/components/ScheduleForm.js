@@ -55,16 +55,6 @@ export class ScheduleForm extends Component {
         
         //this.props.addSchedule(this.state)
         this.props.postSchedule(this.state)
-        
-
-
-        // axios.post('http://localhost:3000/api/v1/schedules',this.state)
-        //     .then(resp =>{
-        //         console.log(resp)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
 
 
         
