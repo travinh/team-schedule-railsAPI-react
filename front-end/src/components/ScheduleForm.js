@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {postSchedule} from '../actions/scheduleActions'
+// import {postSchedule} from '../actions/scheduleActions'
 
 
 import {addSchedule} from '../actions/scheduleActions';
+
 // import axios from 'axios'
 
 export class ScheduleForm extends Component {
@@ -20,42 +21,37 @@ export class ScheduleForm extends Component {
         }
     }
 
-    // handleSubmit = (e) =>{
-    //     console.log("handle submit")
-    //     e.preventDefault()
-    //     // console.log(this)
-     
-    //     // const [title,content, user_id] = e.target.querySelectorAll("input")
-    //     const [title,content, user_id, num_member] = this.formRef.current.querySelectorAll("input")
-    //     const schedule = {
-    //         title : title.value,
-    //         content : content.value, 
-    //         user_id : user_id.value,
-    //         num_member : num_member.value
-
-    //     }
-    //     console.log(schedule)
-    //     this.props.addSchedule(schedule)
-    //     this.setState({
-    //         title : "",
-    //         content : "",
-    //         user_id : "",
-    //         num_member: ""
-    //     })
-
-
-    // }
-
+   
     handleSubmit = (e) =>{
  
         e.preventDefault()
-        console.log(this.state)
-       
-   
-        
-        //this.props.addSchedule(this.state)
-        this.props.postSchedule(this.state)
+        console.log("this.state in handle sumbit: ", this.state)
+        // this.props.postSchedule(this.state)
 
+        fetch("http://localhost:3000/api/v1/schedules",{
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(this.state)
+          })
+        .then(resp => resp.json())
+        .then(data => {
+            if (!data.errors){
+                // dispatch(createSchedule(schedule))
+                alert("Create Successfully!")
+            }
+            else{
+                alert("Fail to Create!")
+                
+            }
+            
+        })
+
+        this.props.addSchedule(this.state)
+
+        
 
         
         
@@ -72,6 +68,7 @@ export class ScheduleForm extends Component {
     handleChange = (e) =>{
         
         this.setState({[e.target.name]: e.target.value})
+        
     }
     
 
@@ -99,4 +96,4 @@ export class ScheduleForm extends Component {
 // }
 
 
-export default connect(null, {addSchedule, postSchedule}) (ScheduleForm)
+export default connect(null, {addSchedule}) (ScheduleForm)

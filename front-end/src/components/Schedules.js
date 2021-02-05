@@ -24,145 +24,145 @@ class Schedules extends Component{
             // {id:1,title: "appointment",content: "with team",user_id: 1, num_member: 0},
             // {id:2, title: "meeting",content: "with customer",user_id: 2, num_member: 0}
             schedules: [],  
-            title:"Loading..." , displayClock:true   
+            title:"Loading..." , displayClock:true
              
         }
       
+        this.handleChange = this.handleChange.bind(this);
         this.remove = this.remove.bind(this)
         console.log("1. Schedules constructor")
     }
 
 
-    like(){
-        console.log(
-            "liked"
-        )
-    }
+    // like(){
+    //     console.log("liked", liked)
+        
+
+    // }
     remove(id){
         //this is here is a single schedule when we call it
         console.log("remove ", id,this.props)
-        
-        
-        // this.setState((prevState)=>{
-        //     debugger
-        //     const filteredSchedules = prevState.schedules.filter(car => car.id !==id)
-        //     return {schedules: filteredSchedules}
-        // })
 
-        // axios.delete(`http://localhost:3000/api/v1/schedules/${id}`)
-        //     .then(resp =>{
-               
-        //         console.log("resp:",resp)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
 
-      
-
-        // fetch("http://localhost:3000/api/v1/schedules")
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     this.setState({schedules:data})
-        // })
-        // window.location.reload(false)
     }
 
   
 
-    // addSchedule = (schedule) =>{
-    //     console.log("add schedule")
-    //     this.setState((prevState)=>{
-    //         const id = prevState.schedules[prevState.schedules.length -1].id +1
-    //         const copySchedule = {...schedule,id}
-    //         console.log(copySchedule)
-    //         return {schedules: [...prevState.schedules, copySchedule]}
-    //     })
-    //     // fetch("http://localhost:3000/api/v1/schedules")
-    //     // .then(resp => resp.json())
-    //     // .then(data => {
-    //     //     this.setState({schedules:data})
-    //     // })
-        
-
-    // }
-
     componentDidMount(){
-        //place to make AJAX requests
-        // fetch("http://localhost:3000/api/v1/schedules")
-        // .then(resp => resp.json())
-        // .then(data => {
-        //     this.props.setSchedules(data)
-        // })
-        console.log("A")
+        console.log("Did mount")
+        console.log(this.props.fetchSchedules, fetchSchedules)
+     
+        
         this.props.fetchSchedules()
-        console.log("B")
+        
         
         setTimeout(() => {
             this.setState({title:"Schedules List"})
         }, 1000);
+
+        // this.setState({
+        //     schedules: this.props.schedules
+        //   });
         
     }
 
     componentDidUpdate(prevProps, prevState){
-        console.log("4. Schedules did update")
-        //use for AJAX requests that use more than once
-        
-        
-
-        
-        // if()
-        // {
-        //     fetch("http://localhost:3000/api/v1/schedules")
-        //     .then(resp => resp.json())
-        //     .then(data => {
-        //         respBool = true
-        //         this.setState({schedules:data})
-        //     })
-        // }
+        console.log("Update")
        
-        
 
     }
 
-    // shouldComponentUpdate(nextProps, nextState){
-    //     if(nextState.title === this.state.title){
-    //         return false
-    //     }
-    //     else 
-    //         return true
-    // }
+    // componentWillReceiveProps(nextProps) {
+    //     console.log("receive props", nextProps)
+    //     this.setState({
+    //       schedules: nextProps.schedules
+    //     });
+    //   }
+
 
     toggleClock = () =>{
         this.setState((prevState) => ({displayClock:!prevState.displayClock}))
+        
     }
 
     refreshData = () =>{
+        
         console.log("Refreshed data!!")
-        this.props.fetchSchedules()
+
+        
+        // this.props.fetchSchedules()
         
 
     }
 
-    render(){
-        
-        console.log("state render:",this.state)
-        console.log("props render:",this.props)
-        
+
+    // addSchedule = () => {
+
+    //     console.log("add schedule")
+
+    //     this.setState((prevState,props) =>{
+    //         debugger
+    //     })
+
+
+    // }
+  
+    handleChange(e){
+        // const filteredSchedules = schedules.filter(car => car.id !==id)
+        let currentList = [];
+        let newList = [];
        
+        if (e.target.value !== "") {
+            
+            currentList = this.props.schedules;
+
+            newList = currentList.filter(schedule=>{
+                const lc= schedule.title.toLowerCase();
+                const filter = e.target.value.toLowerCase();
+                return lc.includes(filter);
+            })
+
+        }
+        else{
+            newList = this.props.schedules;
+        }
+        
+        this.setState({schedules: newList,
+        search: e.target.value})
+        console.log("after handle setstate")
+
+        
+    
+    }
+    
+
+
+    render(){
+        console.log("render")
+        
+        // console.log("state render:",this.state)
+        console.log("props render:",this.props)
+        console.log("state render:",this.state)
+        
+
         return(
             <Router>
                 <div>
                     <Link to="/" onClick={this.refreshData}><button>Home</button></Link>
                     <Link to="/schedules/new"><button>New Shedule</button></Link>
                     <Link to="/clock"><button>Clock</button></Link>
+                   
+                    
+                    
 
                     <Switch>
                         {/* <Route path="/schedules/new">
                             <h2>Create New Schedule</h2>
                             < ScheduleForm addSchedule={this.addSchedule}/>
                         </Route> */}
-                        <Route path="/schedules/new" component={ScheduleForm}/>
+                        <Route path="/schedules/new" component={ScheduleForm} />
+
+                        
                         
 
                         
@@ -174,14 +174,18 @@ class Schedules extends Component{
                         </Route>
 
                         {/* <Route path="/schedules/:id" render={(routerProps)=> <ScheduleShow {...routerProps} schedules={this.state.schedules}/>} /> */}
-                        <Route path="/schedules/:id" component={ScheduleShow}/>                        
+                        <Route path="/schedules/:id" component={ScheduleShow} />                        
 
                        
                         
                         
                         <Route path="/">
+                            {/* <p>
+                            <input type="text" placeholder="search" onChange={this.handleChange} value={this.state.search}></input>
+                            </p> */}
                             <h1>{this.state.title}</h1>
-                            {this.props.schedules.map(schedule => <Schedule key={schedule.id} schedule={schedule} remove={this.remove} like={this.like}/>)}
+                            {this.props.schedules.map(schedule => 
+                             <Schedule key={schedule.id} schedule={schedule}  />)}
                         </Route>
 
                     </Switch>
@@ -197,7 +201,8 @@ class Schedules extends Component{
 }
 
 function mapStateToProps(state){
-    console.log("state:",state)
+
+    console.log("state in schedules:",state)
     
     return{
 
@@ -205,4 +210,10 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps, {fetchSchedules}) (Schedules)
+function mapDispatchToProps(dispatch){
+    return {
+        fetchSchedules: () => dispatch(fetchSchedules())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Schedules)

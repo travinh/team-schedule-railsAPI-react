@@ -1,37 +1,53 @@
 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
-import {scheduleShow} from '../actions/scheduleActions'
+import {showSchedule} from '../actions/scheduleActions'
+import {setSchedules} from '../actions/scheduleActions'
+
+// import {showSchedule} from '../actions/scheduleActions'
 
 
 
-export class ScheduleShow extends Component {
-    // state= {
-    //     schedule: {
-    //         title: "",
-    //         content: "",
-    //         user_id: "",
-    //         num_member: ""
-    //     }
-    // }
+export class ScheduleShow extends Component{
 
+    constructor(props) {
+        super(props)
+        
+        this.state={
+            schedule: {
+                title: "",
+                content: "",
+                user_id: "",
+                num_member: ""
+            }
+        }
+    }
     componentDidMount(){
+        console.log("1")
+   
+        // this.props.showSchedule(this.props.match.params.id)
+        console.log(this.props)
+        let selectedSchedule = {}
+        selectedSchedule = this.props.schedules.schedules.find(item => item.id === parseInt(this.props.match.params.id))
+        this.setState({
+            schedule : selectedSchedule
+        })
         
-        
-        this.props.scheduleShow(this.props.match.params.id)
+
     }
 
    
     
     render() {
        
-        console.log(this.state)
+        console.log("render")
+        
         return (
             <div>
-                <p>Title: {this.props.schedule.title} </p>
-                <p>Content: {this.props.schedule.content}</p>
-                <p>Member: {this.props.schedule.num_member} </p>
-                <p>User ID: {this.props.schedule.user_id}</p>
+                <p>Title: {this.state.schedule.title} </p>
+                <p>Content: {this.state.schedule.content}</p>
+                <p>Member: {this.state.schedule.num_member} </p>
+                <p>User ID: {this.state.schedule.user_id}</p>
                 
             </div>
         )
@@ -41,12 +57,15 @@ export class ScheduleShow extends Component {
 }
 
 const mapStateToProps =(state) =>{
+    console.log("2", state)
     return{
-        schedule:state.selectedSchedule
+        
+        schedules:state
         
     }
 }
 
-export default connect(mapStateToProps,{scheduleShow})(ScheduleShow)
+export default connect(mapStateToProps,{showSchedule,setSchedules})(ScheduleShow)
+
 
 
