@@ -34,11 +34,7 @@ class Schedules extends Component{
     }
 
 
-    // like(){
-    //     console.log("liked", liked)
-        
-
-    // }
+   
     remove(id){
         //this is here is a single schedule when we call it
         console.log("remove ", id,this.props)
@@ -58,11 +54,9 @@ class Schedules extends Component{
         
         setTimeout(() => {
             this.setState({title:"Schedules List"})
-        }, 1000);
+        }, 500);
 
-        // this.setState({
-        //     schedules: this.props.schedules
-        //   });
+     
         
     }
 
@@ -72,39 +66,16 @@ class Schedules extends Component{
 
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("receive props", nextProps)
-    //     this.setState({
-    //       schedules: nextProps.schedules
-    //     });
-    //   }
-
 
     toggleClock = () =>{
         this.setState((prevState) => ({displayClock:!prevState.displayClock}))
         
     }
 
-    refreshData = () =>{
+    // refreshData = () =>{
         
-        console.log("Refreshed data!!")
-
+    //     console.log("Refreshed data!!")
         
-        // this.props.fetchSchedules()
-        
-
-    }
-
-
-    // addSchedule = () => {
-
-    //     console.log("add schedule")
-
-    //     this.setState((prevState,props) =>{
-    //         debugger
-    //     })
-
-
     // }
   
     handleChange(e){
@@ -148,7 +119,8 @@ class Schedules extends Component{
         return(
             <Router>
                 <div>
-                    <Link to="/" onClick={this.refreshData}><button>Home</button></Link>
+                    {/* <Link to="/" onClick={this.refreshData}><button>Home</button></Link> */}
+                    <Link to="/" ><button>Home</button></Link>
                     <Link to="/schedules/new"><button>New Shedule</button></Link>
                     <Link to="/clock"><button>Clock</button></Link>
                    

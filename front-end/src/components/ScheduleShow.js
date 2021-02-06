@@ -12,7 +12,7 @@ export class ScheduleShow extends Component{
 
     constructor(props) {
         super(props)
-        
+        console.log("constructer")
         this.state={
             schedule: {
                 title: "",
